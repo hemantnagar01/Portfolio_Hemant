@@ -21,7 +21,7 @@ const REPEL_FORCE     = 0.08;
 const HOVER_DIST      = 40;
 const LERP_FACTOR     = 0.08;
 
-const ROLES = ['Software Developer', 'UI/UX Designer', 'Graphic Designer'];
+const ROLES = ['Full Stack Developer', 'React Native Developer', 'AI & Cloud Professional'];
 const ROLE_HOLD_MS    = 2200;
 const ROLE_TRANSIT_MS = 400;
 

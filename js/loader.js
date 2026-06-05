@@ -113,14 +113,9 @@ function buildLoader() {
       <line x1="12" y1="12" x2="12" y2="78" stroke-linecap="round"/>
       <line x1="12" y1="45" x2="42" y2="45" stroke-linecap="round"/>
       <line x1="42" y1="12" x2="42" y2="78" stroke-linecap="round"/>
-      <!-- S — smooth double-curve, optically balanced, tapered terminals -->
+      <!-- N — three distinct geometric segments -->
       <path
-        d="M88 26
-           C88 17 102 12 112 16
-           C122 20 124 28 116 34
-           C108 40  94 42  88 49
-           C82 56  82 65  92 71
-           C102 77 118 74 122 66"
+        d="M 82 78 L 82 12 L 112 78 L 112 12"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
