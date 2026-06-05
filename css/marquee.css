@@ -1,0 +1,123 @@
+/* ============================================================
+   marquee.css — Scrolling Ticker / Marquee Strip
+   ============================================================ */
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-scroll-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* ── Marquee Wrapper ─────────────────────────────────────── */
+
+.marquee-strip {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-24) 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--bg-primary);
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+  cursor: default;
+  user-select: none;
+}
+
+/* Fade edges */
+.marquee-strip::before,
+.marquee-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-strip::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-primary), transparent);
+  transition: background 0.5s ease;
+}
+
+.marquee-strip::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-primary), transparent);
+  transition: background 0.5s ease;
+}
+
+/* ── Track ───────────────────────────────────────────────── */
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.marquee-strip:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-strip--reverse .marquee-track {
+  animation-name: marquee-scroll-reverse;
+  animation-duration: 32s;
+}
+
+/* ── Item ────────────────────────────────────────────────── */
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-24);
+  padding: 0 var(--space-32);
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.marquee-item:hover {
+  color: var(--text-primary);
+}
+
+/* Separator dot */
+.marquee-sep {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  flex-shrink: 0;
+  transition: background-color 0.5s ease;
+}
+
+/* ── Signal Theme ────────────────────────────────────────── */
+
+[data-theme="signal"] .marquee-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+[data-theme="signal"] .marquee-sep {
+  box-shadow: 0 0 6px var(--accent-primary);
+}
+
+/* ── Reduced Motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}

@@ -1,0 +1,574 @@
+/* ============================================================
+   about.css — Skills Constellation & About Me Section
+   Depends on: variables.css, themes.css, typography.css, animations.css
+   No hex colors. Zero duplication of existing keyframes/classes.
+   ============================================================ */
+
+/* ── Extend design tokens (additive only) ────────────────── */
+
+:root {
+  /* Third accent color — amber (Void/Signal), terracotta (Ivory).
+     Overridden per-theme in themes.css would be ideal, but since we
+     cannot touch themes.css we set the Void/Signal value here and
+     let themes.css ivory override via the cascade if --accent-tertiary
+     is ever added there. For now: amber works on all dark themes.     */
+  --accent-tertiary: #FFB800;
+}
+
+/* Ivory theme override */
+[data-theme="ivory"] {
+  --accent-tertiary: #C96A50;
+}
+
+/* ── New Keyframes (about-exclusive) ─────────────────────── */
+
+@keyframes about-badge-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes about-portrait-reveal {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: scale(1.08);
+  }
+  to {
+    clip-path: inset(0% 0 0 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes about-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Section Base ────────────────────────────────────────── */
+
+#about {
+  background-color: var(--bg-primary);
+  transition: background-color 0.5s var(--ease-in-out-quad);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PART A — SKILLS CONSTELLATION
+═══════════════════════════════════════════════════════════ */
+
+/* ── Constellation Section Header ───────────────────────── */
+
+.const-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-48);
+  padding: clamp(6rem, 12vw, 10rem) clamp(2rem, 6vw, 8rem) clamp(3rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.const-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.const-section-label {
+  display: block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo);
+}
+
+.const-section-label.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.const-title {
+  transition: color 0.5s ease;
+}
+
+.const-header-right {
+  padding-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s var(--ease-out-expo) 0.3s,
+    transform 0.6s var(--ease-out-expo) 0.3s;
+}
+
+.const-header-right.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.const-copy {
+  color: var(--text-secondary);
+  max-width: 440px;
+  line-height: 1.75;
+  transition: color 0.5s ease;
+}
+
+/* ── Canvas Container ────────────────────────────────────── */
+
+.const-canvas-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  transition: background-color 0.5s ease;
+}
+
+#skills-canvas {
+  display: block;
+  width: 100%;
+  height: clamp(480px, 60vh, 680px);
+}
+
+/* ── Tooltip ─────────────────────────────────────────────── */
+
+#skills-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s var(--ease-out-expo),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+#skills-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#skills-tooltip.is-hiding {
+  opacity: 0;
+  transition-duration: 0.15s;
+}
+
+.tooltip-name {
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+}
+
+.tooltip-group {
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+}
+
+/* ── Mobile Tag-Cloud (< 768px) ──────────────────────────── */
+
+.skills-tag-cloud {
+  display: none;
+  padding: 0 clamp(1.5rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+}
+
+.tag-cloud-group {
+  margin-bottom: var(--space-32);
+}
+
+.tag-cloud-group-label {
+  display: block;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-12);
+  transition: color 0.5s ease;
+}
+
+.tag-cloud-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.tag-pill {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.4s var(--ease-out-expo),
+    transform 0.4s var(--ease-out-expo),
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.tag-pill.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PART B — ABOUT ME
+═══════════════════════════════════════════════════════════ */
+
+.about-section {
+  padding: clamp(6rem, 10vw, 10rem) clamp(2rem, 6vw, 8rem);
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+/* ── Left: Portrait ──────────────────────────────────────── */
+
+.about-portrait-wrap {
+  position: relative;
+  max-width: 420px;
+}
+.about-portrait {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    145deg,
+    var(--bg-elevated) 0%,
+    var(--bg-surface) 50%,
+    var(--bg-elevated) 100%
+  );
+  position: relative;
+  overflow: hidden;
+  clip-path: inset(100% 0 0 0);
+  transform: scale(1.08);
+  transition:
+    background 0.5s ease;
+}
+
+.about-portrait.is-visible {
+  animation: about-portrait-reveal 0.9s var(--ease-out-expo) forwards;
+}
+
+.about-portrait-initials {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 140px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--bg-primary);
+  opacity: 0.4;
+  user-select: none;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    color 0.5s ease;
+}
+
+/* Portrait hover: accent tint overlay */
+.about-portrait-tint {
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent-primary);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+}
+
+.about-portrait-wrap:hover .about-portrait-tint {
+  opacity: 0.15;
+}
+
+.about-portrait-wrap:hover .about-portrait-initials {
+  opacity: 0.65;
+}
+
+/* ── Right: Text Content ─────────────────────────────────── */
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+/* Eyebrow */
+.about-eyebrow {
+  display: block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+  color: var(--text-secondary);
+}
+
+.about-eyebrow.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Title — clip-path word reveal */
+.about-title {
+  overflow: hidden;
+  transition: color 0.5s ease;
+}
+
+.about-title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.about-title-word {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition:
+    transform 0.7s var(--ease-out-expo),
+    opacity 0.7s var(--ease-out-expo);
+}
+
+.about-title-word.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Bio */
+.about-bio {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 540px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo),
+    color 0.5s ease;
+}
+
+.about-bio.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Principles 2×2 grid */
+.about-principles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16) var(--space-24);
+}
+
+.about-principle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo);
+}
+
+.about-principle.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-principle-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent-primary);
+  transition: color 0.5s ease;
+}
+
+.about-principle-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  transition: color 0.5s ease;
+}
+
+/* Stats row */
+.about-stats {
+  display: flex;
+  gap: var(--space-32);
+  flex-wrap: wrap;
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo);
+}
+
+.about-stat.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent-primary);
+  transition: color 0.5s ease;
+}
+
+.about-stat-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.5s ease;
+}
+
+/* Availability badge */
+.about-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: 6px 16px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  width: fit-content;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.about-availability.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-availability-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-secondary);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.about-availability-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--accent-secondary);
+  animation: about-badge-pulse 2s ease-in-out infinite;
+}
+
+/* ── Responsive: Tablet ──────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .const-header {
+    grid-template-columns: 1fr;
+    gap: var(--space-24);
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+  }
+
+  .about-portrait-wrap {
+    max-width: 360px;
+  }
+
+  .about-principles {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Responsive: Mobile ──────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Hide canvas, show tag cloud */
+  .const-canvas-wrap {
+    display: none;
+  }
+
+  .skills-tag-cloud {
+    display: block;
+  }
+
+  .about-stats {
+    gap: var(--space-24);
+  }
+}
+
+/* ── Signal Theme Overrides ──────────────────────────────── */
+/* Node glow + connection pulse handled in about.js canvas draw.
+   CSS can only handle DOM-side overrides.                        */
+
+[data-theme="signal"] .about-availability-dot::after {
+  background-color: var(--accent-secondary);
+}
+
+/* ── Reduced Motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .const-section-label,
+  .const-header-right,
+  .about-eyebrow,
+  .about-bio,
+  .about-principle,
+  .about-stat,
+  .about-availability,
+  .tag-pill,
+  .about-title-word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  .about-portrait {
+    clip-path: inset(0% 0 0 0);
+    transform: scale(1);
+    animation: none;
+  }
+
+  .about-availability-dot::after {
+    animation: none;
+  }
+}

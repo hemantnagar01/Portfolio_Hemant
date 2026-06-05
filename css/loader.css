@@ -1,0 +1,145 @@
+/* ============================================================
+   loader.css — Preloader Styles
+   The loader element is injected by loader.js.
+   Background is always #0A0A0F — intentionally not a variable
+   so the loader is always dark regardless of saved theme.
+   ============================================================ */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  background-color: #0A0A0F;
+  overflow: hidden;
+}
+
+/* ── Curtain Halves ────────────────────────────────────── */
+#loader-top,
+#loader-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: #0A0A0F;
+  transition: transform 0.7s var(--ease-in-expo);
+  will-change: transform;
+  z-index: 1;
+}
+
+#loader-top {
+  top: 0;
+  height: 50%;
+  transform-origin: top center;
+}
+
+#loader-bottom {
+  bottom: 0;
+  height: 50%;
+  transform-origin: bottom center;
+}
+
+/* Exit states triggered by JS */
+#loader-top.exiting {
+  transform: translateY(-100%);
+}
+
+#loader-bottom.exiting {
+  transform: translateY(100%);
+}
+
+/* ── Content Container ─────────────────────────────────── */
+#loader-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-32);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Initials SVG ──────────────────────────────────────── */
+#loader-initials {
+  width: clamp(80px, 10vw, 120px);
+  height: auto;
+}
+
+#loader-initials path,
+#loader-initials text {
+  fill: none;
+  stroke: #6C63FF;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke 0.3s ease;
+}
+
+#loader-initials.drawing path,
+#loader-initials.drawing text {
+  animation: stroke-draw 1.2s var(--ease-out-expo) forwards;
+}
+
+/* ── Counter ───────────────────────────────────────────── */
+#loader-counter {
+  font-family: var(--font-mono);
+  font-size: clamp(48px, 8vw, 88px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #F0EFE8;
+  min-width: 3ch;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#loader-counter.visible {
+  opacity: 1;
+}
+
+/* ── Progress Bar ──────────────────────────────────────── */
+#loader-bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.loader-dash {
+  width: clamp(24px, 4vw, 40px);
+  height: 2px;
+  background-color: #3A3A4A;
+  border-radius: 1px;
+  transition: background-color 0.2s ease;
+}
+
+.loader-dash.filled {
+  background-color: #6C63FF;
+  animation: progress-dash 0.2s var(--ease-out-expo) both;
+}
+
+/* ── Signal theme scramble color override ──────────────── */
+[data-theme="signal"] #loader-initials path,
+[data-theme="signal"] #loader-initials text {
+  stroke: #00E5FF;
+}
+
+[data-theme="signal"] .loader-dash.filled {
+  background-color: #00E5FF;
+}
+
+/* ── Reduced Motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #loader-initials.drawing path,
+  #loader-initials.drawing text {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  #loader-top,
+  #loader-bottom {
+    transition: none;
+  }
+}

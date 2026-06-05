@@ -1,0 +1,233 @@
+/* ============================================================
+   polish.css — Global Cross-Portfolio Polish Pass
+   Session 6 additions only. No overwrites of existing rules.
+   ============================================================ */
+
+/* ── POLISH 1: Smooth Scroll ─────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── POLISH 2: Section Entrance Consistency ──────────────── */
+
+/* Minimum top padding ensures sections never look cramped when
+   scrolling continuously. Each section's own padding can exceed
+   this — this is just a safety floor.                          */
+#work,
+#design,
+#about,
+#contact {
+  scroll-margin-top: 80px; /* offset for fixed nav */
+}
+
+/* ── POLISH 3: Focus Visible Styles ─────────────────────── */
+
+/* Remove browser default focus ring globally */
+*:focus {
+  outline: none;
+}
+
+/* Provide clean, on-brand focus ring for keyboard users */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+  transition: outline-color 0.3s ease;
+}
+
+/* ── POLISH 4: Selection Style ───────────────────────────── */
+
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+::-moz-selection {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+/* ── POLISH 5: Custom Scrollbar (Webkit) ─────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* ── POLISH 7: Theme Switcher Entrance ───────────────────── */
+
+/* Hidden during preloader, revealed by polish.js after loaderComplete */
+#theme-switcher {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease 0.2s;
+}
+
+#theme-switcher.is-ready {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── POLISH 8: Reduced Motion Global Safety Net ──────────── */
+
+/* Individual components already handle this — this is a catch-all */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── POLISH 9: Image Placeholder Min-Height ──────────────── */
+
+.work-img-placeholder {
+  min-height: 280px;
+}
+
+.gallery-item-placeholder {
+  min-height: 200px;
+}
+
+/* Design gallery items (matching the actual class used in design.js) */
+.design-img {
+  min-height: 160px;
+}
+
+/* ── POLISH 10: Mobile Menu Z-Index Safety ───────────────── */
+
+#mobile-menu {
+  z-index: calc(var(--z-nav) + 10);
+}
+
+/* ── POLISH 11: Print Stylesheet ─────────────────────────── */
+
+@media print {
+  /* Hide interactive / visual-only elements */
+  #loader,
+  #cursor-dot,
+  #cursor-ring,
+  #theme-switcher,
+  #main-nav,
+  #hero-canvas,
+  #skills-canvas,
+  .scroll-progress,
+  .contact-bg-text,
+  .footer-watermark,
+  .ba-handle,
+  .about-availability-dot::after {
+    display: none !important;
+  }
+
+  /* Reset colors for print */
+  *,
+  *::before,
+  *::after {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Remove transforms — show everything static */
+  .contact-hl-word,
+  .about-title-word,
+  .about-portrait,
+  .work-card,
+  .design-item,
+  .about-stat,
+  .about-principle,
+  .field-group {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Ensure readable layout */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #444 !important;
+  }
+
+  /* Don't show URL for anchor links */
+  a[href^="#"]::after {
+    content: '';
+  }
+}
+
+/* ── Miscellaneous Global Polish ─────────────────────────── */
+
+/* Prevent layout shift from scrollbar appearing/disappearing */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Smooth image rendering for any non-CSS images that may be added later */
+img {
+  image-rendering: auto;
+}
+
+/* Better box-sizing fallback */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow at the document level */
+body {
+  overflow-x: hidden;
+}
+
+/* Ensure canvas elements are block-level to prevent inline gaps */
+canvas {
+  display: block;
+}
+
+/* ── Section interstitial theming polish ─────────────────── */
+
+/* Ensure interstitials transition smoothly with theme change */
+.section-interstitial hr {
+  transition: border-color 0.5s ease;
+}
+
+.section-interstitial .t-label {
+  transition: color 0.5s ease;
+}
+
+/* ── Link reset ─────────────────────────────────────────── */
+
+/* All portfolio links inherit color by default unless specifically styled */
+a {
+  color: inherit;
+}

@@ -1,0 +1,656 @@
+/* ============================================================
+   enhancements.css — Premium Visual Upgrades
+   Elevates the portfolio to award-level quality.
+   Loaded last so it can override where needed.
+   ============================================================ */
+
+/* ══════════════════════════════════════════════════════════
+   1. HERO UPGRADES
+══════════════════════════════════════════════════════════ */
+
+/* Italic serif accent on "alive" — editorial contrast */
+.hero-word--accent {
+  font-family: var(--font-serif, var(--font-display));
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Gradient text on accent word */
+[data-theme="void"] .hero-word--accent {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+[data-theme="signal"] .hero-word--accent {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+/* Hero eyebrow — accent line is added via CSS in hero.css */
+
+/* Hero left — add a subtle vertical rule on the right edge */
+.hero-left::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 0;
+  bottom: 20%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border-subtle) 30%, var(--border-subtle) 70%, transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .hero-left::after { display: none; }
+}
+
+/* Hero canvas — add a subtle radial gradient overlay */
+.hero-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, transparent 40%, var(--bg-primary) 100%);
+  z-index: 1;
+  pointer-events: none;
+  transition: background 0.5s ease;
+}
+
+/* ── Hero Floating Index Number ──────────────────────────── */
+
+.hero-index-num {
+  position: absolute;
+  top: calc(var(--nav-height) + var(--space-32));
+  right: 43%; /* sits just inside the right column edge */
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.6s var(--ease-out-expo) 1.2s,
+    transform 0.6s var(--ease-out-expo) 1.2s,
+    color 0.5s ease;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-index-num.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .hero-index-num {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. MAGNETIC BUTTON EFFECT
+══════════════════════════════════════════════════════════ */
+
+.magnetic-btn {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-out-expo);
+  will-change: transform;
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. NAV UPGRADES — Link hover underline
+══════════════════════════════════════════════════════════ */
+
+/* Nav link hover — subtle underline draw from left */
+.nav-links a:not(.active)::before {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: var(--space-12);
+  right: var(--space-12);
+  height: 1px;
+  background-color: var(--accent-primary);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.3s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.nav-links a:not(.active):hover::before {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ══════════════════════════════════════════════════════════
+   4. SECTION INTERSTITIAL UPGRADE
+══════════════════════════════════════════════════════════ */
+
+.section-interstitial {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+/* HRs start visible — animation is a bonus, not required */
+.section-interstitial hr {
+  transition: border-color 0.5s ease;
+}
+
+/* ══════════════════════════════════════════════════════════
+   5. WORK SECTION UPGRADES
+══════════════════════════════════════════════════════════ */
+
+/* Cursor-following image preview for editorial row */
+.work-cursor-preview {
+  position: fixed;
+  width: 280px;
+  height: 180px;
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  z-index: calc(var(--z-overlay) - 1);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.85) rotate(-3deg);
+  transition:
+    opacity 0.3s var(--ease-out-expo),
+    transform 0.4s var(--ease-out-expo);
+  will-change: transform, opacity;
+  box-shadow: var(--shadow-lg);
+}
+
+.work-cursor-preview.is-visible {
+  opacity: 1;
+  transform: scale(1) rotate(-1.5deg);
+}
+
+.work-cursor-preview-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Work title — add a large italic serif number */
+.work-item--feature-split .work-project-num,
+.work-item--editorial-row .work-editorial-num {
+  font-family: var(--font-serif, var(--font-display));
+  font-style: italic;
+}
+
+/* Work header title — editorial serif italic accent */
+.work-title em,
+.design-title em,
+.const-title em {
+  font-family: var(--font-serif, var(--font-display));
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-primary);
+}
+
+.work-item--feature-split {
+  position: relative;
+}
+
+.work-item--feature-split::before {
+  content: '';
+  position: absolute;
+  left: clamp(2rem, 6vw, 8rem);
+  top: 10%;
+  bottom: 10%;
+  width: 2px;
+  background-color: var(--accent-primary);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--ease-out-expo);
+  border-radius: 1px;
+}
+
+.work-item--feature-split:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+/* ══════════════════════════════════════════════════════════
+   6. ABOUT SECTION UPGRADES
+══════════════════════════════════════════════════════════ */
+
+/* ── About Portrait — Decorative frame offset ────────────── */
+.about-portrait-wrap {
+  overflow: visible; /* allow the ::before frame to show */
+}
+
+.about-portrait-wrap::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: -12px;
+  bottom: -12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  z-index: 0;
+  transition: border-color 0.5s ease, transform 0.4s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.about-portrait-wrap:hover::before {
+  transform: translate(4px, 4px);
+  border-color: var(--accent-primary);
+}
+
+.about-portrait-wrap .about-portrait {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stats — large display numbers with gradient */
+[data-theme="void"] .about-stat-value,
+[data-theme="signal"] .about-stat-value {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Principles — add a left accent bar */
+.about-principle {
+  padding-left: var(--space-16);
+  border-left: 2px solid var(--border-subtle);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo),
+    border-color 0.3s ease;
+}
+
+.about-principle:hover {
+  border-color: var(--accent-primary);
+}
+
+/* ══════════════════════════════════════════════════════════
+   7. CONTACT SECTION UPGRADES
+══════════════════════════════════════════════════════════ */
+
+/* Contact headline — line 1 gets serif italic treatment */
+.contact-hl-line--1 {
+  font-family: var(--font-serif, var(--font-display));
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Email link — large and bold */
+.aside-email-link {
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════════════════════════════
+   8. FOOTER REDESIGN
+══════════════════════════════════════════════════════════ */
+
+#footer {
+  padding-top: 0;
+}
+
+.footer-inner {
+  padding-top: 2.5rem;
+}
+
+/* Footer logo — bigger, bolder */
+.footer-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* Footer — add a large decorative year */
+.footer-year-display {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-muted);
+  opacity: 0.08;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  right: clamp(2rem, 6vw, 8rem);
+  bottom: 0;
+  transition: color 0.5s ease;
+}
+
+/* ══════════════════════════════════════════════════════════
+   9. FLOATING AVAILABILITY ORB
+══════════════════════════════════════════════════════════ */
+
+#availability-orb {
+  position: fixed;
+  bottom: var(--space-32);
+  right: var(--space-32);
+  z-index: calc(var(--z-nav) - 1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 8px 16px 8px 10px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+#availability-orb.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+#availability-orb:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--accent-secondary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-lg), 0 0 0 3px rgba(57, 255, 122, 0.1);
+}
+
+.orb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-secondary);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.orb-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background-color: var(--accent-secondary);
+  opacity: 0.3;
+  animation: orb-pulse 2s ease-in-out infinite;
+}
+
+@keyframes orb-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50%       { transform: scale(2); opacity: 0; }
+}
+
+/* On mobile, hide orb to avoid crowding with theme switcher */
+@media (max-width: 640px) {
+  #availability-orb {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   10. THEME SWITCHER — handled in theme-switcher.css
+══════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════
+   11. SCROLL PROGRESS BAR UPGRADE
+══════════════════════════════════════════════════════════ */
+
+#scroll-progress {
+  height: 2px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  transition: none; /* Remove transition for real-time feel */
+}
+
+[data-theme="signal"] #scroll-progress {
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* ══════════════════════════════════════════════════════════
+   12. GLOBAL HOVER LIFT ON CARDS
+══════════════════════════════════════════════════════════ */
+
+.work-watermark-card {
+  transition:
+    opacity 0.8s var(--ease-out-expo) 0.2s,
+    transform 0.8s var(--ease-out-expo) 0.2s,
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.work-item--type-watermark:hover .work-watermark-card {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ══════════════════════════════════════════════════════════
+   13. SIGNAL THEME SPECIAL EFFECTS
+══════════════════════════════════════════════════════════ */
+
+/* Glowing borders on cards in Signal */
+[data-theme="signal"] .work-watermark-card {
+  border-color: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.05), var(--shadow-md);
+}
+
+[data-theme="signal"] .work-item--type-watermark:hover .work-watermark-card {
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.1), var(--shadow-lg);
+}
+
+/* Signal: nav pill glow */
+[data-theme="signal"] #main-nav.nav-scrolled {
+  box-shadow: var(--shadow-md), 0 0 20px rgba(0, 229, 255, 0.08);
+  border-color: rgba(0, 229, 255, 0.2);
+}
+
+/* Signal: section interstitial accent */
+[data-theme="signal"] .section-interstitial span {
+  color: var(--accent-primary);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+
+/* ══════════════════════════════════════════════════════════
+   14. DESIGN GALLERY UPGRADES
+══════════════════════════════════════════════════════════ */
+
+/* Gallery items — add a subtle border */
+.design-item {
+  border: 1px solid var(--border-subtle);
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s var(--ease-out-expo),
+    border-color 0.3s ease;
+}
+
+.design-item:hover {
+  border-color: var(--border-default);
+}
+
+[data-theme="signal"] .design-item:hover {
+  border-color: rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.06);
+}
+
+/* ══════════════════════════════════════════════════════════
+   15. LOADER UPGRADE — Centered initials with glow
+══════════════════════════════════════════════════════════ */
+
+#loader-initials path,
+#loader-initials line {
+  filter: drop-shadow(0 0 8px rgba(108, 99, 255, 0.4));
+}
+
+[data-theme="signal"] #loader-initials path,
+[data-theme="signal"] #loader-initials line {
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.6));
+}
+
+/* ══════════════════════════════════════════════════════════
+   16. CURSOR — keep normal blend mode for clean look
+══════════════════════════════════════════════════════════ */
+
+/* Signal theme: cursor gets a glow */
+[data-theme="signal"] #cursor-ring {
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+/* ══════════════════════════════════════════════════════════
+   17. NOISE TEXTURE OVERLAY (Void theme)
+══════════════════════════════════════════════════════════ */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) - 1);
+  opacity: var(--noise-opacity, 0.025);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   18. WORK HEADER — Italic serif accent
+══════════════════════════════════════════════════════════ */
+
+.work-title {
+  position: relative;
+}
+
+/* Add a decorative accent line under the work count */
+.work-count {
+  display: block;
+}
+
+.work-count::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--accent-primary);
+  margin-top: var(--space-16);
+  transition: background-color 0.5s ease, width 0.4s var(--ease-out-expo);
+}
+
+.work-count:hover::after {
+  width: 80px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   19. ABOUT PORTRAIT — Initials upgrade
+══════════════════════════════════════════════════════════ */
+
+.about-portrait-initials {
+  font-family: var(--font-serif, var(--font-display));
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════════════════════
+   20. MOBILE MENU UPGRADE
+══════════════════════════════════════════════════════════ */
+
+/* Mobile menu links — add stagger entrance */
+#mobile-menu.is-open .mobile-nav-links li {
+  animation: mobile-link-in 0.5s var(--ease-out-expo) both;
+}
+
+#mobile-menu.is-open .mobile-nav-links li:nth-child(1) { animation-delay: 0.1s; }
+#mobile-menu.is-open .mobile-nav-links li:nth-child(2) { animation-delay: 0.18s; }
+#mobile-menu.is-open .mobile-nav-links li:nth-child(3) { animation-delay: 0.26s; }
+#mobile-menu.is-open .mobile-nav-links li:nth-child(4) { animation-delay: 0.34s; }
+
+@keyframes mobile-link-in {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   21. HERO CANVAS — Vignette
+══════════════════════════════════════════════════════════ */
+
+.hero-right {
+  position: relative;
+}
+
+/* ══════════════════════════════════════════════════════════
+   22. SECTION LABELS — Accent dot prefix
+══════════════════════════════════════════════════════════ */
+
+.work-section-label::before,
+.design-section-label::before,
+.const-section-label::before,
+.ux-section-label::before {
+  content: '●';
+  margin-right: var(--space-8);
+  color: var(--accent-primary);
+  font-size: 8px;
+  vertical-align: middle;
+  transition: color 0.5s ease;
+}
+
+/* ══════════════════════════════════════════════════════════
+   23. CONTACT FORM — Enhanced field focus
+══════════════════════════════════════════════════════════ */
+
+.field-group:focus-within .field-label {
+  letter-spacing: 0.14em;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* ══════════════════════════════════════════════════════════
+   24. REDUCED MOTION SAFETY
+══════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word--accent {
+    background: none;
+    -webkit-text-fill-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .about-stat-value {
+    background: none;
+    -webkit-text-fill-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  #availability-orb {
+    opacity: 1;
+    transform: none;
+  }
+
+  .orb-dot::after {
+    animation: none;
+  }
+
+  .section-interstitial.is-visible hr {
+    animation: none;
+    transform: scaleX(1);
+  }
+
+  #mobile-menu.is-open .mobile-nav-links li {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

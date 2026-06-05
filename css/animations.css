@@ -1,0 +1,168 @@
+/* ============================================================
+   animations.css — Keyframes & Reusable Animation Utilities
+   ============================================================ */
+
+/* ── Keyframes ──────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes slide-out-right {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
+@keyframes slide-up-exit {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+
+@keyframes slide-down-exit {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progress-dash {
+  from { opacity: 0.2; }
+  to   { opacity: 1; }
+}
+
+@keyframes stroke-draw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes counter-blur-in {
+  from {
+    filter: blur(4px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes cursor-ring-expand {
+  from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  to   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+}
+
+/* ── Utility Animation Classes ───────────────────────────── */
+
+.anim-fade-in {
+  animation: fade-in 0.6s var(--ease-out-expo) both;
+}
+
+.anim-fade-up {
+  animation: fade-up 0.7s var(--ease-out-expo) both;
+}
+
+.anim-fade-down {
+  animation: fade-down 0.7s var(--ease-out-expo) both;
+}
+
+.anim-scale-in {
+  animation: scale-in 0.5s var(--ease-out-expo) both;
+}
+
+/* Stagger helpers — apply to parent, children get nth-child delays */
+.stagger-children > * {
+  animation: fade-up 0.7s var(--ease-out-expo) both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.19s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.26s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.33s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.40s; }
+
+/* ── Interaction Utilities ───────────────────────────────── */
+
+.hover-lift {
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s var(--ease-out-expo);
+}
+.hover-glow:hover {
+  box-shadow: 0 0 24px rgba(108, 99, 255, 0.3);
+}
+
+/* ── Hidden until JS triggers reveal ────────────────────── */
+.reveal-ready {
+  opacity: 0;
+}
+.reveal-ready.revealed {
+  animation: fade-up 0.8s var(--ease-out-expo) both;
+}
+
+/* ── Reduced Motion Overrides ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-in,
+  .anim-fade-up,
+  .anim-fade-down,
+  .anim-scale-in,
+  .stagger-children > *,
+  .hover-lift,
+  .reveal-ready.revealed {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

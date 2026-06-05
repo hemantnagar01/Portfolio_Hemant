@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="void">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hemant Singh — Software Developer, UI/UX Designer & Graphic Designer. Crafting precise, editorial digital experiences." />
+  <meta property="og:title" content="Hemant Singh — Portfolio" />
+  <meta property="og:description" content="Software Developer, UI/UX Designer & Graphic Designer. Awwwards-level portfolio." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0A0A0F" />
+  <meta name="color-scheme" content="dark light" />
+
+  <title>Hemant Singh — Portfolio</title>
+
+  <!--
+    ─── FOUC Prevention ────────────────────────────────────────────────────
+    Apply saved theme before any CSS renders to prevent flash.
+  -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        var valid = ['void', 'ivory', 'signal'];
+        if (saved && valid.indexOf(saved) !== -1) {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!--
+    ─── Font Preloads ──────────────────────────────────────────────────────
+    Preload critical font weights to prevent layout shift.
+  -->
+  <link
+    rel="preconnect"
+    href="https://api.fontshare.com"
+    crossorigin
+  />
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <!--
+    ─── Stylesheets ────────────────────────────────────────────────────────
+    Order matters: reset → tokens → themes → type → components → animations
+  -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/cursor.css" />
+  <link rel="stylesheet" href="css/loader.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/theme-switcher.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/work.css" />
+  <link rel="stylesheet" href="css/design.css" />
+  <link rel="stylesheet" href="css/about.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/polish.css" />
+  <link rel="stylesheet" href="css/marquee.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+</head>
+
+<body>
+  <!--
+    ─── Custom Cursor Elements ──────────────────────────────────────────
+    Must be first in body so they render above all content.
+    Managed entirely by cursor.js.
+  -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!--
+    ─── Scroll Progress Bar ─────────────────────────────────────────────
+  -->
+  <div id="scroll-progress" aria-hidden="true" role="progressbar"
+    aria-label="Page scroll progress" aria-valuenow="0"
+    aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!--
+    ─── Floating Availability Orb ───────────────────────────────────────
+  -->
+  <a href="#contact" id="availability-orb" aria-label="Available for work — contact me">
+    <span class="orb-dot" aria-hidden="true"></span>
+    <span>Available for work</span>
+  </a>
+
+  <!--
+    ─── Navigation ──────────────────────────────────────────────────────
+  -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" data-cursor="hover" aria-label="Hemant Singh — Home">
+      Hemant<span class="nav-logo-dot" aria-hidden="true">.</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#work" data-cursor="hover">Work</a></li>
+      <li><a href="#design" data-cursor="hover">Design</a></li>
+      <li><a href="#about" data-cursor="hover">About</a></li>
+      <li><a href="#contact" data-cursor="hover">Contact</a></li>
+    </ul>
+
+    <a href="#" class="nav-resume t-label" data-cursor="hover"
+      aria-label="Download resume (opens external link)">
+      Resume ↗
+    </a>
+
+    <button
+      class="nav-hamburger"
+      id="nav-hamburger-btn"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!--
+    ─── Film Grain Noise Overlay ────────────────────────────────────────
+    Fixed pseudo-element on body::after defined in CSS below.
+    Controlled by --noise-opacity per theme.
+  -->
+
+  <!--
+    ─── Main Content ────────────────────────────────────────────────────
+    Placeholder sections to verify scroll behavior and nav tracking.
+    Each section has min-height: 100vh.
+    These will be replaced in future sessions.
+  -->
+  <main id="main-content" aria-label="Main content">
+
+    <!-- ─── HERO SECTION ──────────────────────────────────────── -->
+    <section id="hero" aria-labelledby="hero-headline-label">
+
+      <!-- Left Column: Typographic statement -->
+      <div class="hero-left">
+
+        <!-- Eyebrow -->
+        <div class="hero-eyebrow">
+          <span class="t-label t-secondary" id="hero-headline-label">Selected Work 2019–2025</span>
+        </div>
+
+        <!-- Headline: four-line clip-path word reveal -->
+        <div class="hero-headline" aria-label="I build interfaces that feel alive">
+          <div class="hero-line" data-line="1" aria-hidden="true">
+            <span class="hero-word-wrap">
+              <span class="hero-word hero-word--thin">I build</span>
+            </span>
+          </div>
+          <div class="hero-line" data-line="2" aria-hidden="true">
+            <span class="hero-word-wrap">
+              <span class="hero-word hero-word--heavy">interfaces</span>
+            </span>
+          </div>
+          <div class="hero-line" data-line="3" aria-hidden="true">
+            <span class="hero-word-wrap">
+              <span class="hero-word hero-word--thin">that feel</span>
+            </span>
+          </div>
+          <div class="hero-line" data-line="4" aria-hidden="true">
+            <span class="hero-word-wrap">
+              <span class="hero-word hero-word--accent">alive</span>
+              <span class="hero-cursor" aria-hidden="true">_</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Role Cycling Row -->
+        <div class="hero-role-row" aria-live="polite" aria-label="Current role">
+          <div class="hero-role-dot" aria-hidden="true"></div>
+          <div class="hero-role-text-track">
+            <span class="hero-role-text">Software Developer</span>
+          </div>
+        </div>
+
+        <!-- Meta Row -->
+        <div class="hero-meta">
+          <span class="hero-location t-small">Based in India</span>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Generative canvas -->
+      <div class="hero-right" aria-hidden="true">
+        <canvas
+          id="hero-canvas"
+          role="img"
+          aria-label="Animated particle network visualization"
+        ></canvas>
+      </div>
+
+      <!-- Floating index number -->
+      <div class="hero-index-num" aria-hidden="true">001 / 2025</div>
+
+      <!-- Scroll Indicator -->
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+        <span class="hero-scroll-label t-label t-secondary">Scroll</span>
+      </div>
+
+    </section>
+    <!-- ─── END HERO ──────────────────────────────────────────── -->
+
+    <!-- ─── SECTION INTERSTITIAL (Hero → Work) ─────────────── -->
+    <div class="section-interstitial" aria-hidden="true">
+      <hr />
+      <span class="t-label t-secondary">Work</span>
+      <hr />
+    </div>
+
+    <!-- ─── SKILLS MARQUEE STRIP ────────────────────────────── -->
+    <div class="marquee-strip" aria-hidden="true" id="marquee-strip">
+      <div class="marquee-track" id="marquee-track">
+        <!-- Items injected by enhancements.js -->
+      </div>
+    </div>
+
+    <!-- ─── WORK SECTION ────────────────────────────────────── -->
+    <section id="work" aria-labelledby="work-title">
+
+      <!-- Section Header -->
+      <div class="work-header">
+        <div class="work-header-left">
+          <span class="work-section-label t-label t-secondary">Selected Work</span>
+          <h2 class="t-display work-title" id="work-title">Built with<br>intention.</h2>
+        </div>
+        <div class="work-header-right">
+          <span class="work-count t-mono" aria-label="4 projects">00</span>
+          <p class="t-body work-description">
+            A curated set of projects spanning product development,
+            interface design, and graphic systems.
+          </p>
+        </div>
+      </div>
+
+      <!-- Desktop Project List (built by work.js) -->
+      <div class="work-list" id="work-list" aria-label="Selected projects"></div>
+
+      <!-- Mobile Carousel (built by work.js) -->
+      <div class="work-carousel" id="work-carousel" aria-label="Project carousel"></div>
+
+    </section>
+    <!-- ─── END WORK ─────────────────────────────────────────── -->
+
+    <!-- ─── SECTION INTERSTITIAL (Work → Design) ─────────── -->
+    <div class="section-interstitial" aria-hidden="true">
+      <hr />
+      <span class="t-label t-secondary">Design</span>
+      <hr />
+    </div>
+
+    <!-- ─── DESIGN SECTION ─────────────────────────────────── -->
+    <section id="design" aria-labelledby="design-title">
+
+      <!-- ── PART A: Graphic Design Gallery ───────────────── -->
+
+      <!-- Gallery Header -->
+      <div class="design-header">
+        <div class="design-header-left">
+          <span class="design-section-label t-label t-secondary">Graphic Design</span>
+          <h2 class="t-display design-title" id="design-title">Visual<br>systems.</h2>
+        </div>
+        <div class="design-header-right">
+          <span class="design-count t-mono" aria-label="12 items">00</span>
+          <p class="t-body design-header-desc">
+            Branding, illustration, print, and digital design work
+            from 2019 to present.
+          </p>
+        </div>
+      </div>
+
+      <!-- Filter Bar (items injected by design.js) -->
+      <div
+        class="design-filter-bar"
+        id="design-filter-bar"
+        role="tablist"
+        aria-label="Filter design work by category"
+      ></div>
+
+      <!-- Gallery Grid (items injected by design.js) -->
+      <div class="design-gallery">
+        <div
+          class="design-grid"
+          id="design-grid"
+          aria-label="Design portfolio gallery"
+        ></div>
+      </div>
+
+      <!-- ── SECTION INTERSTITIAL (Gallery → Process) ──────── -->
+      <div class="section-interstitial" aria-hidden="true">
+        <hr />
+        <span class="t-label t-secondary">Process</span>
+        <hr />
+      </div>
+
+      <!-- ── PART B: UX Case Study ─────────────────────────── -->
+      <div class="ux-case-study">
+
+        <!-- UX Header -->
+        <div class="ux-header">
+          <div class="ux-header-left">
+            <span class="ux-section-label t-label t-secondary">UX Case Study</span>
+            <h2 class="t-display ux-title">How I think<br>through problems.</h2>
+          </div>
+          <div class="ux-header-right">
+            <div class="ux-project-name">Drift App</div>
+            <p class="ux-project-desc t-body">From messy research to a 4.8-star launch.</p>
+          </div>
+        </div>
+
+        <!-- Process Timeline -->
+        <div class="ux-timeline-wrap">
+          <div class="ux-timeline" id="ux-timeline" aria-label="Design process timeline">
+            <!-- Connecting line -->
+            <div class="ux-timeline-line" aria-hidden="true"></div>
+
+            <!-- Stage 1: Discover -->
+            <div class="ux-stage">
+              <div class="ux-stage-node" aria-hidden="true"></div>
+              <div class="ux-stage-num" aria-hidden="true">01</div>
+              <span class="ux-stage-label t-label">Discover</span>
+              <p class="ux-stage-desc t-small">14 user interviews, 3 competitor analyses, diary studies over 2 weeks.</p>
+            </div>
+
+            <!-- Stage 2: Define -->
+            <div class="ux-stage">
+              <div class="ux-stage-node" aria-hidden="true"></div>
+              <div class="ux-stage-num" aria-hidden="true">02</div>
+              <span class="ux-stage-label t-label">Define</span>
+              <p class="ux-stage-desc t-small">Affinity mapping → 4 core pain points → single problem statement.</p>
+            </div>
+
+            <!-- Stage 3: Design -->
+            <div class="ux-stage">
+              <div class="ux-stage-node" aria-hidden="true"></div>
+              <div class="ux-stage-num" aria-hidden="true">03</div>
+              <span class="ux-stage-label t-label">Design</span>
+              <p class="ux-stage-desc t-small">32 screens across 5 major iterations. Every decision documented.</p>
+            </div>
+
+            <!-- Stage 4: Build -->
+            <div class="ux-stage">
+              <div class="ux-stage-node" aria-hidden="true"></div>
+              <div class="ux-stage-num" aria-hidden="true">04</div>
+              <span class="ux-stage-label t-label">Build</span>
+              <p class="ux-stage-desc t-small">React Native + Expo. Shipped to TestFlight in 6 weeks.</p>
+            </div>
+
+            <!-- Stage 5: Ship -->
+            <div class="ux-stage">
+              <div class="ux-stage-node" aria-hidden="true"></div>
+              <div class="ux-stage-num" aria-hidden="true">05</div>
+              <span class="ux-stage-label t-label">Ship</span>
+              <p class="ux-stage-desc t-small">Soft launch to 200 beta users. 4.8 stars, 94% D7 retention.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Before / After Slider -->
+        <div class="ba-section">
+          <div class="ba-slider" id="ba-slider">
+            <div class="ba-before">
+              <div class="ba-placeholder ba-placeholder--before" aria-hidden="true"></div>
+              <span class="ba-label t-label">Before</span>
+            </div>
+            <div class="ba-after">
+              <div class="ba-placeholder ba-placeholder--after" aria-hidden="true"></div>
+              <span class="ba-label t-label">After</span>
+            </div>
+            <div
+              class="ba-handle"
+              role="slider"
+              tabindex="0"
+              aria-label="Comparison slider"
+              aria-valuenow="50"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <div class="ba-handle-line" aria-hidden="true"></div>
+              <div class="ba-handle-grip" aria-hidden="true">
+                <span>&#8249;</span><span>&#8250;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metrics Row -->
+        <div class="ux-metrics" aria-label="Project outcomes">
+          <div class="ux-metric">
+            <div class="ux-metric-value t-display" aria-label="4.8 star App Store rating">0★</div>
+            <div class="ux-metric-label t-label">App Store Rating</div>
+          </div>
+          <div class="ux-metric">
+            <div class="ux-metric-value t-display" aria-label="94% Day-7 retention">0%</div>
+            <div class="ux-metric-label t-label">Day-7 Retention</div>
+          </div>
+          <div class="ux-metric">
+            <div class="ux-metric-value t-display" aria-label="2.3x session length increase">0×</div>
+            <div class="ux-metric-label t-label">Session Length Increase</div>
+          </div>
+        </div>
+
+        <!-- Pull Quote -->
+        <div class="ux-quote-wrap">
+          <div class="ux-quote-mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>
+            <p class="ux-quote-text t-subhead">
+              It&rsquo;s the first productivity app that actually gets out of my way.
+            </p>
+            <cite class="ux-quote-attribution t-small">
+              &mdash; Beta User, Week 2 Feedback
+            </cite>
+          </blockquote>
+        </div>
+
+      </div>
+      <!-- ── END UX CASE STUDY ──────────────────────────────── -->
+
+    </section>
+    <!-- ─── END DESIGN ──────────────────────────────────────── -->
+
+    <!-- ─── SECTION INTERSTITIAL (Design → About) ────────── -->
+    <div class="section-interstitial" aria-hidden="true">
+      <hr />
+      <span class="t-label t-secondary">About</span>
+      <hr />
+    </div>
+
+    <!-- ─── ABOUT SECTION ─────────────────────────────────── -->
+    <section id="about" aria-labelledby="about-title">
+
+      <!-- ── PART A: Skills Constellation ────────────────── -->
+
+      <!-- Constellation Header -->
+      <div class="const-header">
+        <div class="const-header-left">
+          <span class="const-section-label t-label t-secondary">Capabilities</span>
+          <h2 class="t-display const-title" id="about-title">What I<br>bring to the table.</h2>
+        </div>
+        <div class="const-header-right">
+          <p class="const-copy t-body">
+            Three disciplines, one fluent practice. I move between code,
+            product design, and visual communication without switching gears.
+          </p>
+        </div>
+      </div>
+
+      <!-- Canvas (desktop) -->
+      <div class="const-canvas-wrap" aria-label="Interactive skills constellation">
+        <canvas
+          id="skills-canvas"
+          role="img"
+          aria-label="Skill nodes organized into three groups: Development, Design, and Tools"
+        ></canvas>
+        <!-- Tooltip (populated by about.js) -->
+        <div id="skills-tooltip" aria-hidden="true" role="tooltip">
+          <div class="tooltip-name"></div>
+          <div class="tooltip-group"></div>
+        </div>
+      </div>
+
+      <!-- Mobile tag-cloud (populated by about.js) -->
+      <div class="skills-tag-cloud" aria-label="Skills by category"></div>
+
+      <!-- ── SECTION INTERSTITIAL (Constellation → Background) ── -->
+      <div class="section-interstitial" aria-hidden="true">
+        <hr />
+        <span class="t-label t-secondary">Background</span>
+        <hr />
+      </div>
+
+      <!-- ── PART B: About Me ───────────────────────────── -->
+      <div class="about-section">
+        <div class="about-layout">
+
+          <!-- Left: Portrait -->
+          <div class="about-portrait-wrap">
+            <div class="about-portrait" aria-hidden="true">
+              <div class="about-portrait-initials">H.S.</div>
+              <div class="about-portrait-tint"></div>
+            </div>
+          </div>
+
+          <!-- Right: Text Content -->
+          <div class="about-content">
+
+            <span class="about-eyebrow t-label">About Me</span>
+
+            <h2 class="about-title t-display">
+              <span class="about-title-line">
+                <span class="about-title-word">I design</span>
+                <span class="about-title-word">&nbsp;what</span>
+                <span class="about-title-word">&nbsp;I build,</span>
+              </span>
+              <span class="about-title-line">
+                <span class="about-title-word">and build</span>
+                <span class="about-title-word">&nbsp;what</span>
+                <span class="about-title-word">&nbsp;I design.</span>
+              </span>
+            </h2>
+
+            <p class="about-bio t-body">
+              I&rsquo;m a software developer, UI/UX designer, and graphic designer based in India.
+              I&rsquo;ve spent the last six years working at the intersection of code and craft
+              &mdash; building products that are both technically solid and visually considered.
+              I believe the best interfaces are the ones that feel inevitable: obvious in
+              hindsight, invisible in use.
+            </p>
+
+            <!-- Principles 2&times;2 grid -->
+            <div class="about-principles" aria-label="Design and development principles">
+              <div class="about-principle">
+                <span class="about-principle-num">01</span>
+                <p class="about-principle-text t-small">Design is a decision-making framework, not a decoration layer.</p>
+              </div>
+              <div class="about-principle">
+                <span class="about-principle-num">02</span>
+                <p class="about-principle-text t-small">The best code is the code your users never have to think about.</p>
+              </div>
+              <div class="about-principle">
+                <span class="about-principle-num">03</span>
+                <p class="about-principle-text t-small">Research earns the right to design with confidence.</p>
+              </div>
+              <div class="about-principle">
+                <span class="about-principle-num">04</span>
+                <p class="about-principle-text t-small">Ship it, learn from it, make it better.</p>
+              </div>
+            </div>
+
+            <!-- Stats row -->
+            <div class="about-stats" aria-label="Career statistics">
+              <div class="about-stat">
+                <div class="about-stat-value">0+</div>
+                <div class="about-stat-label t-small">Years of experience</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">0+</div>
+                <div class="about-stat-label t-small">Projects shipped</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">0</div>
+                <div class="about-stat-label t-small">Disciplines mastered</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-value">&infin;</div>
+                <div class="about-stat-label t-small">Cups of chai</div>
+              </div>
+            </div>
+
+            <!-- Availability badge -->
+            <div class="about-availability" aria-label="Currently open to opportunities">
+              <div class="about-availability-dot" aria-hidden="true"></div>
+              <span>Open to opportunities</span>
+            </div>
+
+          </div>
+          <!-- end .about-content -->
+
+        </div>
+        <!-- end .about-layout -->
+      </div>
+      <!-- ── END ABOUT ME ───────────────────────────────────── -->
+
+    </section>
+    <!-- ─── END ABOUT ───────────────────────────────────────── -->
+
+    <!-- ─── SECTION INTERSTITIAL (About → Contact) ──────── -->
+    <div class="section-interstitial" aria-hidden="true">
+      <hr />
+      <span class="t-label t-secondary">Contact</span>
+      <hr />
+    </div>
+
+    <!-- ─── CONTACT SECTION ───────────────────────────────── -->
+    <section id="contact" aria-labelledby="contact-title">
+
+      <!-- Decorative background watermark -->
+      <div class="contact-bg-text" aria-hidden="true">Let&#8217;s talk.</div>
+
+      <div class="contact-inner">
+
+        <!-- Headline -->
+        <div class="contact-headline" aria-label="Contact headline">
+          <div class="t-display contact-hl-line contact-hl-line--1">
+            <span class="contact-hl-word" data-line-index="0" data-word-index="0">Got</span>
+            <span class="contact-hl-word" data-line-index="0" data-word-index="1">&nbsp;a</span>
+            <span class="contact-hl-word" data-line-index="0" data-word-index="2">&nbsp;project</span>
+          </div>
+          <div class="t-display contact-hl-line contact-hl-line--2">
+            <span class="contact-hl-word" data-line-index="1" data-word-index="0">in</span>
+            <span class="contact-hl-word" data-line-index="1" data-word-index="1">&nbsp;mind?</span>
+          </div>
+          <div class="t-display contact-hl-line contact-hl-line--3">
+            <span class="contact-hl-word" data-line-index="2" data-word-index="0">Let&#8217;s</span>
+            <span class="contact-hl-word" data-line-index="2" data-word-index="1">&nbsp;build</span>
+            <span class="contact-hl-word" data-line-index="2" data-word-index="2">&nbsp;it.</span>
+          </div>
+        </div>
+
+        <!-- Two-column layout -->
+        <div class="contact-layout">
+
+          <!-- 60% — Form Column -->
+          <div class="contact-form-col">
+            <div
+              class="contact-form"
+              role="form"
+              aria-label="Contact form"
+            >
+
+              <!-- Name field -->
+              <div class="field-group">
+                <label class="t-label field-label" for="field-name">Name</label>
+                <input
+                  type="text"
+                  id="field-name"
+                  class="field-input"
+                  placeholder="Your name"
+                  autocomplete="name"
+                  aria-required="true"
+                />
+                <div class="field-line" aria-hidden="true"></div>
+              </div>
+
+              <!-- Email field -->
+              <div class="field-group">
+                <label class="t-label field-label" for="field-email">Email</label>
+                <input
+                  type="email"
+                  id="field-email"
+                  class="field-input"
+                  placeholder="your@email.com"
+                  autocomplete="email"
+                  aria-required="true"
+                />
+                <div class="field-line" aria-hidden="true"></div>
+              </div>
+
+              <!-- Message field -->
+              <div class="field-group">
+                <label class="t-label field-label" for="field-message">Message</label>
+                <textarea
+                  id="field-message"
+                  class="field-input field-textarea"
+                  placeholder="Tell me about your project&hellip;"
+                  aria-required="true"
+                ></textarea>
+                <div class="field-line" aria-hidden="true"></div>
+              </div>
+
+              <!-- Submit button -->
+              <button
+                class="contact-submit"
+                type="button"
+                id="contact-submit"
+                aria-label="Send message"
+              >
+                <span class="submit-fill" aria-hidden="true"></span>
+                <div class="submit-text-wrap">
+                  <span class="submit-text">Send message</span>
+                  <span class="submit-spinner" aria-hidden="true"></span>
+                </div>
+              </button>
+
+              <!-- Success state (hidden until form submits) -->
+              <div class="contact-success" role="status" aria-live="polite">
+                <div class="success-check-wrap">
+                  <svg
+                    class="success-check-svg"
+                    viewBox="0 0 52 52"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <circle
+                      class="success-check-circle"
+                      cx="26"
+                      cy="26"
+                      r="25"
+                    />
+                    <polyline
+                      class="success-check-tick"
+                      points="14,27 22,35 38,19"
+                    />
+                  </svg>
+                </div>
+                <div class="success-title t-heading">Message sent.</div>
+                <div class="success-sub t-body">I&#8217;ll be in touch soon.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 40% — Aside Column -->
+          <div class="contact-aside">
+
+            <!-- Email block -->
+            <div class="aside-email-block">
+              <span class="aside-email-label t-label">Email</span>
+              <a
+                href="mailto:hello@hemant.design"
+                class="aside-email-link"
+                data-cursor="hover"
+                aria-label="Send email to hello@hemant.design"
+              >hello@hemant.design</a>
+            </div>
+
+            <!-- Social links -->
+            <div class="aside-social-block">
+              <span class="aside-social-label t-label">Find me on</span>
+              <div class="aside-social-links">
+
+                <a
+                  href="https://github.com"
+                  class="aside-social-row"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  aria-label="GitHub profile"
+                >
+                  <div class="aside-social-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span class="aside-social-name t-small">GitHub</span>
+                </a>
+
+                <a
+                  href="https://linkedin.com"
+                  class="aside-social-row"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  aria-label="LinkedIn profile"
+                >
+                  <div class="aside-social-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span class="aside-social-name t-small">LinkedIn</span>
+                </a>
+
+                <a
+                  href="https://dribbble.com"
+                  class="aside-social-row"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  aria-label="Dribbble profile"
+                >
+                  <div class="aside-social-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M8 0C3.584 0 0 3.584 0 8s3.584 8 8 8 8-3.584 8-8-3.584-8-8-8zm5.284 3.688a6.802 6.802 0 0 1 1.545 4.251c-.226-.043-2.482-.503-4.755-.217-.052-.112-.096-.234-.148-.355-.139-.33-.295-.668-.451-.99 2.516-1.023 3.662-2.498 3.81-2.69zM8 1.18a6.804 6.804 0 0 1 4.72 1.897c-.113.148-1.163 1.54-3.593 2.44a27.97 27.97 0 0 0-2.025-3.197A6.895 6.895 0 0 1 8 1.18zm-2.38.481A26.713 26.713 0 0 1 7.61 4.842C5.172 5.462 3.018 5.453 2.771 5.453a6.84 6.84 0 0 1 2.849-3.792zM1.172 8.01v-.191c.242.009 2.814.052 5.42-.745.15.296.294.600.434.904a7.08 7.08 0 0 0-.399.138C3.83 9.195 2.604 11.4 2.508 11.576A6.802 6.802 0 0 1 1.172 8.01zm6.828 6.83a6.8 6.8 0 0 1-4.208-1.446c.077-.148 1.198-2.02 4.08-3.207.017-.009.026-.009.043-.017a24.81 24.81 0 0 1 1.164 4.43 6.84 6.84 0 0 1-1.079.24zm2.41-.5a26.12 26.12 0 0 0-1.086-4.13c2.134-.338 4.012.217 4.251.295a6.82 6.82 0 0 1-3.164 3.835z" fill="currentColor" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <span class="aside-social-name t-small">Dribbble</span>
+                </a>
+
+                <a
+                  href="https://x.com"
+                  class="aside-social-row"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  aria-label="X (Twitter) profile"
+                >
+                  <div class="aside-social-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span class="aside-social-name t-small">X / Twitter</span>
+                </a>
+
+              </div>
+            </div>
+
+            <!-- Response time -->
+            <p class="aside-response t-small">Typically responds within 24 hours.</p>
+
+          </div>
+          <!-- end .contact-aside -->
+
+        </div>
+        <!-- end .contact-layout -->
+      </div>
+      <!-- end .contact-inner -->
+
+    </section>
+    <!-- ─── END CONTACT ─────────────────────────────────────── -->
+
+  </main>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+  <footer id="footer" aria-label="Site footer">
+
+    <!-- Watermark — clipped by overflow:hidden on footer -->
+    <div class="footer-watermark" aria-hidden="true">HEMANT</div>
+
+    <!-- Decorative year display -->
+    <div class="footer-year-display" aria-hidden="true" id="footer-year-display">2025</div>
+
+    <div class="footer-inner">
+
+      <!-- Left: Logo + tagline -->
+      <div class="footer-left">
+        <span class="footer-logo">Hemant.</span>
+        <p class="footer-tagline t-small">
+          Designing at the intersection of<br>code and craft.
+        </p>
+      </div>
+
+      <!-- Centre: Nav links -->
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#work"    class="footer-link t-label" data-cursor="hover">Work</a>
+        <a href="#design"  class="footer-link t-label" data-cursor="hover">Design</a>
+        <a href="#about"   class="footer-link t-label" data-cursor="hover">About</a>
+        <a href="#contact" class="footer-link t-label" data-cursor="hover">Contact</a>
+      </nav>
+
+      <!-- Right: Live clock + copyright -->
+      <div class="footer-right">
+        <div id="footer-time" aria-label="Current time in India" aria-live="polite"></div>
+        <p class="footer-copy t-small">
+          &copy; <span id="footer-year"></span> Hemant Singh. Crafted with care.
+        </p>
+      </div>
+
+    </div>
+    <!-- end .footer-inner -->
+
+  </footer>
+  <!-- ═══ END FOOTER ════════════════════════════════════════════════ -->
+
+  <!--
+    ─── Inline Critical Styles ──────────────────────────────────────────
+    Noise overlay and placeholder sections only — keeps these out of
+    separate CSS files since they're minimal and inline avoids a request.
+  -->
+  <style>
+    /* Placeholder sections (legacy, kept for safety) */
+    .placeholder-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .placeholder-section:nth-child(odd) {
+      background-color: var(--bg-primary);
+    }
+
+    .placeholder-section:nth-child(even) {
+      background-color: var(--bg-surface);
+    }
+
+    .placeholder-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-16);
+      text-align: center;
+    }
+  </style>
+
+  <!--
+    ─── JavaScript Modules ──────────────────────────────────────────────
+    All deferred. loader.js runs first (sets sessionStorage flag),
+    theme.js applies saved theme, then cursor + nav initialize.
+  -->
+  <script type="module" src="js/loader.js"></script>
+  <script type="module" src="js/theme.js"></script>
+  <script type="module" src="js/cursor.js"></script>
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/hero.js"></script>
+  <script type="module" src="js/work.js"></script>
+  <script type="module" src="js/design.js"></script>
+  <script type="module" src="js/about.js"></script>
+  <script type="module" src="js/contact.js"></script>
+  <script type="module" src="js/enhancements.js"></script>
+  <script src="js/polish.js" defer></script>
+
+</body>
+
+</html>

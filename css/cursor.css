@@ -1,0 +1,144 @@
+/* ============================================================
+   cursor.css — Custom Cursor Styles
+   Native cursor is hidden on non-touch devices via JS.
+   ============================================================ */
+
+/* ── Cursor Elements ─────────────────────────────────────── */
+
+#cursor-dot,
+#cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: var(--z-cursor);
+  will-change: transform;
+}
+
+/* ── Dot — 8px filled circle ─────────────────────────────── */
+#cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--cursor-color);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.2s var(--ease-out-expo),
+    height 0.2s var(--ease-out-expo),
+    opacity 0.3s var(--ease-out-expo),
+    background-color 0.3s ease;
+}
+
+/* ── Ring — 36px border ring ─────────────────────────────── */
+#cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cursor-color);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition:
+    width 0.4s var(--ease-out-expo),
+    height 0.4s var(--ease-out-expo),
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+  box-shadow: var(--cursor-glow);
+}
+
+/* Ring inner label (for VIEW / DRAG states) */
+#cursor-ring .cursor-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cursor-color);
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 0.2s var(--ease-out-expo),
+    transform 0.2s var(--ease-out-expo),
+    color 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ── State: Hover ─────────────────────────────────────────── */
+#cursor-ring.state-hover {
+  width: 56px;
+  height: 56px;
+  background-color: transparent;
+  border-color: var(--accent-primary);
+}
+
+#cursor-dot.state-hover {
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent-primary);
+}
+
+/* ── State: View ─────────────────────────────────────────── */
+#cursor-ring.state-view {
+  width: 72px;
+  height: 72px;
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+#cursor-ring.state-view .cursor-label {
+  opacity: 1;
+  transform: scale(1);
+  color: var(--bg-primary);
+}
+
+#cursor-dot.state-view {
+  opacity: 0;
+}
+
+/* ── State: Drag ─────────────────────────────────────────── */
+#cursor-ring.state-drag {
+  width: 64px;
+  height: 64px;
+  border-style: dashed;
+  border-color: var(--accent-secondary);
+}
+
+#cursor-ring.state-drag .cursor-label {
+  opacity: 1;
+  transform: scale(1);
+  color: var(--accent-secondary);
+}
+
+#cursor-dot.state-drag {
+  background-color: var(--accent-secondary);
+}
+
+/* ── Inactive / Hidden ───────────────────────────────────── */
+#cursor-dot.cursor-hidden,
+#cursor-ring.cursor-hidden {
+  opacity: 0;
+}
+
+/* ── Touch devices: disable via JS class on body ─────────── */
+body.touch-device #cursor-dot,
+body.touch-device #cursor-ring {
+  display: none;
+}
+
+body.touch-device {
+  cursor: auto;
+}
+
+/* ── Reduced Motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #cursor-dot,
+  #cursor-ring {
+    transition: none;
+  }
+}

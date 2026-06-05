@@ -1,0 +1,101 @@
+/* ============================================================
+   themes.css — Three Theme Definitions
+   Applied via data-theme="void|ivory|signal" on <html>.
+   No hex color should appear outside this file or variables.css.
+   ============================================================ */
+
+/* ── VOID (Default · Dark) ──────────────────────────────── */
+:root,
+[data-theme="void"] {
+  --bg-primary: #0A0A0F;
+  --bg-surface: #13131A;
+  --bg-elevated: #1C1C26;
+  --accent-primary: #6C63FF;
+  --accent-secondary: #39FF7A;
+  --accent-tertiary: #FF9F43;
+  --text-primary: #F0EFE8;
+  --text-secondary: #6B6B80;
+  --text-muted: #3A3A4A;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --transition-speed: 0.7s;
+  --noise-opacity: 0.025;
+  --cursor-color: #6C63FF;
+  --cursor-glow: none;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+/* ── IVORY (Light) ──────────────────────────────────────── */
+[data-theme="ivory"] {
+  --bg-primary: #FAF9F6;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F2F1EE;
+  --accent-primary: #1A1A2E;
+  --accent-secondary: #C96A50;
+  --accent-tertiary: #8B7355;
+  --text-primary: #0F0F0F;
+  --text-secondary: #9A9A8E;
+  --text-muted: #C8C7C0;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-default: rgba(0, 0, 0, 0.12);
+  --transition-speed: 0.5s;
+  --noise-opacity: 0;
+  --cursor-color: #1A1A2E;
+  --cursor-glow: none;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.12);
+}
+
+/* ── SIGNAL (Experimental · Dark) ───────────────────────── */
+[data-theme="signal"] {
+  --bg-primary: #04070F;
+  --bg-surface: #080D1A;
+  --bg-elevated: #0D1525;
+  --accent-primary: #00E5FF;
+  --accent-secondary: #FF2D78;
+  --accent-tertiary: #FFB800;
+  --text-primary: #E8F8FF;
+  --text-secondary: #4A7A8A;
+  --text-muted: #1A3A44;
+  --border-subtle: rgba(0, 229, 255, 0.08);
+  --border-default: rgba(0, 229, 255, 0.18);
+  --transition-speed: 0.4s;
+  --noise-opacity: 0;
+  --cursor-color: #00E5FF;
+  --cursor-glow: 0 0 12px rgba(0, 229, 255, 0.6), 0 0 24px rgba(0, 229, 255, 0.3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 4px rgba(0, 229, 255, 0.05);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 229, 255, 0.06);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 32px rgba(0, 229, 255, 0.08);
+}
+
+/* ── Global Transition Targets ──────────────────────────── */
+html,
+body,
+main,
+nav,
+#main-nav,
+#mobile-menu,
+#theme-switcher,
+.ts-option {
+  transition:
+    background-color 0.5s var(--ease-in-out-quad),
+    color 0.5s var(--ease-in-out-quad),
+    border-color 0.5s var(--ease-in-out-quad);
+}
+
+/* Reduce transitions on motion-sensitive preference */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body,
+  main,
+  nav,
+  #main-nav,
+  #mobile-menu,
+  #theme-switcher,
+  .ts-option {
+    transition: none !important;
+  }
+}

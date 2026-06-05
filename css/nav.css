@@ -1,0 +1,380 @@
+/* ============================================================
+   nav.css — Navigation Styles
+   ============================================================ */
+
+/* ── Base Navigation ─────────────────────────────────────── */
+#main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-48);
+  height: var(--nav-height);
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    max-width 0.6s var(--ease-out-expo),
+    width 0.6s var(--ease-out-expo),
+    left 0.6s var(--ease-out-expo),
+    right 0.6s var(--ease-out-expo),
+    top 0.5s var(--ease-out-expo),
+    padding 0.6s var(--ease-out-expo),
+    height 0.6s var(--ease-out-expo),
+    border-radius 0.6s var(--ease-out-expo),
+    background-color 0.5s var(--ease-in-out-quad),
+    border-color 0.5s var(--ease-in-out-quad),
+    box-shadow 0.5s ease,
+    transform 0.6s var(--ease-out-expo);
+}
+
+/* ── Scrolled Pill State ─────────────────────────────────── */
+#main-nav.nav-scrolled {
+  top: var(--space-16);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 520px;
+  min-width: 360px;
+  padding: 0 var(--space-20);
+  height: 46px;
+  background-color: var(--bg-surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+}
+
+/* In pill state: hide resume, keep logo + links only */
+#main-nav.nav-scrolled .nav-resume {
+  display: none;
+}
+
+/* Tighten link gaps in pill */
+#main-nav.nav-scrolled .nav-links {
+  gap: 0;
+}
+
+#main-nav.nav-scrolled .nav-links a {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* ── Logo ─────────────────────────────────────────────────── */
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.nav-logo:hover {
+  opacity: 0.75;
+}
+
+/* Accent dot in logo */
+.nav-logo-dot {
+  color: var(--accent-primary);
+  transition: color 0.5s ease;
+}
+
+/* ── Navigation Links ────────────────────────────────────── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  list-style: none;
+  position: relative;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-sm);
+  transition: color 0.25s ease;
+  position: relative;
+  display: block;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Active link */
+.nav-links a.active {
+  color: var(--text-primary);
+}
+
+/* Active dot indicator */
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  transition: background-color 0.5s ease;
+}
+
+/* ── Resume Button ─────────────────────────────────────── */
+.nav-resume {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding: 8px 18px;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.nav-resume:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  background-color: var(--bg-elevated);
+}
+
+/* ── Hamburger Button ────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background-color: var(--text-primary);
+  border-radius: 1px;
+  transition:
+    transform 0.4s var(--ease-out-expo),
+    opacity 0.3s ease,
+    width 0.4s var(--ease-out-expo);
+  transform-origin: center;
+}
+
+.nav-hamburger.is-open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ── Scroll Progress Bar ─────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  z-index: calc(var(--z-nav) + 1);
+  pointer-events: none;
+}
+
+/* ── Mobile Menu Overlay ─────────────────────────────────── */
+#mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-nav) + 10);
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(100%);
+  transition: transform 0.6s var(--ease-out-expo);
+  overflow: hidden;
+}
+
+#mobile-menu.is-open {
+  transform: translateX(0);
+}
+
+#mobile-menu::before {
+  content: 'MENU';
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(100px, 30vw, 240px);
+  font-weight: 800;
+  color: var(--text-muted);
+  opacity: 0.12;
+  letter-spacing: -0.05em;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-nav-links a {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 8vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-secondary);
+  line-height: 1.1;
+  display: block;
+  padding: var(--space-8) var(--space-24);
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    transform 0.4s var(--ease-out-expo);
+}
+
+.mobile-nav-links a:hover {
+  color: var(--text-primary);
+  transform: translateX(8px);
+}
+
+.mobile-nav-close-area {
+  position: absolute;
+  bottom: var(--space-48);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* ── Responsive: Mobile ─────────────────────────────────── */
+@media (max-width: 768px) {
+  #main-nav {
+    padding: 0 var(--space-24);
+  }
+
+  #main-nav.nav-scrolled {
+    left: var(--space-16);
+    right: var(--space-16);
+    width: auto;
+    min-width: unset;
+    max-width: none;
+    transform: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-resume {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+}
+
+/* ── Nav Fade-Up Stagger (post-loader) ───────────────────── */
+.nav-logo,
+.nav-links li,
+.nav-resume {
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo),
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.nav-ready .nav-logo {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.05s;
+}
+
+.nav-ready .nav-links li:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
+.nav-ready .nav-links li:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+.nav-ready .nav-links li:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.20s; }
+.nav-ready .nav-links li:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+
+.nav-ready .nav-resume {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.30s;
+}
+
+/* ── Reduced Motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #main-nav,
+  #main-nav.nav-scrolled,
+  .nav-logo,
+  .nav-links a,
+  .nav-resume,
+  .nav-hamburger span,
+  #mobile-menu,
+  .mobile-nav-links a,
+  .nav-links li {
+    transition: none;
+    animation: none;
+  }
+
+  .nav-logo,
+  .nav-links li,
+  .nav-resume {
+    opacity: 1;
+    transform: none;
+  }
+}
